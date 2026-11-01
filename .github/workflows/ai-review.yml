@@ -1,0 +1,87 @@
+name: AI Repository Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 1 * * 1' # Monday 09:00 Asia/Makassar (UTC+8)
+
+concurrency:
+  group: ai-review-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  review:
+    if: github.event_name != 'pull_request' || github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    outputs:
+      final_message: ${{ steps.codex.outputs.final-message }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Check API key configuration
+        id: preflight
+        shell: bash
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          if [[ -n "$OPENAI_API_KEY" ]]; then
+            echo 'configured=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'configured=false' >> "$GITHUB_OUTPUT"
+            echo 'OPENAI_API_KEY is not configured. AI review was skipped.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Run read-only Codex review
+        id: codex
+        if: steps.preflight.outputs.configured == 'true'
+        uses: openai/codex-action@v1
+        with:
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          prompt-file: .github/prompts/ai-review.md
+          output-file: /tmp/ai-review-output.md
+          sandbox: read-only
+          safety-strategy: drop-sudo
+        env:
+          REVIEW_EVENT: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number || '' }}
+          BASE_REF: ${{ github.event.pull_request.base.ref || '' }}
+
+      - name: Publish non-PR report to workflow summary
+        if: github.event_name != 'pull_request' && steps.codex.outputs.final-message != ''
+        env:
+          REVIEW_REPORT: ${{ steps.codex.outputs.final-message }}
+        run: |
+          printf '%s\n' "$REVIEW_REPORT" >> "$GITHUB_STEP_SUMMARY"
+
+  post-pr-review:
+    if: github.event_name == 'pull_request' && needs.review.outputs.final_message != ''
+    needs: review
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: read
+    steps:
+      - name: Post review report
+        uses: actions/github-script@v7
+        env:
+          REVIEW_REPORT: ${{ needs.review.outputs.final_message }}
+        with:
+          script: |
+            const body = process.env.REVIEW_REPORT;
+            if (!body) { core.info('No review report to publish.'); return; }
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body
+            });
