@@ -383,6 +383,31 @@ Roadmap items are planned work, not claims of completion.
    - Review security boundaries, environment configuration, and operational failure handling.
    - Document remaining gaps before any production-scope decision.
 
+
+## 18. AI Instructions & Automated Repository Maintenance
+
+AI coding agents working on this repository must read and follow [`ai-instruction.md`](./ai-instruction.md) before auditing, planning, modifying, testing, or integrating changes.
+
+### Navigation
+
+- **[AI Instructions — ai-instruction.md](./ai-instruction.md):** complete operating rules for AI agents.
+- **[Project README — README.md](./README.md):** project overview, architecture, requirements, and development documentation.
+
+### How to use
+
+1. Open and read `ai-instruction.md` at the beginning of an AI-assisted repository task.
+2. Audit the latest repository state, current branch, project requirements, and relevant official documentation.
+3. Follow the defined **Audit → Analyze → Plan → Implement → Verify → Report** workflow.
+4. Automatically fix clear, low-risk issues that are within the instruction's allowed scope.
+5. Stop and request an explicit decision for product changes, destructive database operations, security-boundary changes, payment lifecycle changes, deployment, secrets, or other restricted actions.
+6. Run the relevant checks and report actual results; never claim a check passed if it was not executed.
+7. Integrate changes into `main` only when the repository's branch rules and required checks permit it. Use a pull request when review or CI is required; never bypass branch protection or required reviews.
+
+### Automation boundary
+
+The instruction file defines the AI agent's operating policy; it does not itself install or trigger a scheduled automation. Automatic execution requires an AI agent or repository workflow that is configured to read and follow the file. Merge to `main` is conditional on repository permissions, branch protection, required reviews, and successful verification.
+
+
 ---
 
 ## Documentation & References
