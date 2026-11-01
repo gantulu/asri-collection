@@ -1,12 +1,12 @@
 # Requirements — Asri Collection V1
 
-> **Status:** DRAFT — awaiting review and approval  
+> **Status:** DRAFT — product scope and listed decisions recorded; full requirements review and approval still pending  
 > **Version:** V1  
 > **Repository:** `gantulu/asri-collection`  
 > **Branch:** `docs/requirements-v1-draft`  
 > **Last updated:** 2026-11-02  
 >
-> This document is the working product-requirements baseline. It is not an implementation claim, database schema, API contract, or authorization to expand scope. Requirements marked as approved reflect decisions already made; any unresolved detail remains open until explicitly decided.
+> This document is the working product-requirements baseline. It is not an implementation claim, database schema, API contract, or authorization to expand scope. Approved product decisions are recorded in `DECISIONS.md`. This requirements document remains a draft until its complete content is reviewed and explicitly approved. Unresolved details remain open.
 
 ## 1. Purpose
 
@@ -215,19 +215,19 @@ Open questions do not authorize an AI agent to invent business rules. Resolve th
 
 - Each requirement has a stable ID for discussion, implementation, and verification.
 - Acceptance criteria will be maintained separately in `ACCEPTANCE_CRITERIA.md`.
-- Approved business and architecture decisions will be maintained in `DECISIONS.md`.
+- Approved business and product decisions are maintained in `DECISIONS.md`.
 - The target architecture will be documented in `ARCHITECTURE.md`.
 - Implementation sequencing and progress will be maintained in `IMPLEMENTATION_PLAN.md`.
 - Update this document when a requirement is approved, changed, superseded, or removed. Preserve the decision history in `DECISIONS.md`.
 
 ## 12. Change Control
 
-- This document remains **DRAFT** until the user explicitly approves it as the V1 requirements baseline.
+- This document remains **DRAFT** until the user explicitly approves the complete V1 requirements baseline. Individual decisions may already be approved in `DECISIONS.md`.
 - An AI agent may identify inconsistencies and propose edits, but must not silently change approved business rules.
 - Any change to scope, inventory lifecycle, order/payment lifecycle, shipping, refunds, authorization, or security boundaries requires an explicit user decision.
 - Documentation does not prove implementation. Verify actual source code, migrations, functions, and tests before reporting a requirement as implemented.
 
-## 13. Product Discovery Checkpoint — Confirmed Scope
+## 13. Confirmed Product Scope and Planning Workflow
 
 This section records the product decisions explicitly confirmed during the current planning conversation. Continue requirement discovery one step at a time; do not generate the complete application or infer undecided requirements.
 
@@ -252,5 +252,5 @@ This section records the product decisions explicitly confirmed during the curre
 
 ### Topics to discuss in a later step
 
-Payment details and inventory rules were not part of the latest confirmation in this planning conversation. Existing decisions elsewhere in this document remain unchanged unless the user explicitly supersedes them. Revisit these topics during requirement reconciliation rather than inventing new behavior.
+Payment provider, inventory lifecycle, shipping, currency, and refund decisions are recorded in `DECISIONS.md`. They are approved product decisions, but their detailed technical contracts and acceptance tests still require review. Do not reinterpret or silently change them.
 
