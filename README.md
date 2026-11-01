@@ -273,8 +273,8 @@ Prerequisites:
 Once the application manifest is added:
 
 ```bash
-git clone https://github.com/gantulu/app.git
-cd app
+git clone https://github.com/gantulu/asri-collection.git
+cd asri-collection
 npm install
 ```
 
