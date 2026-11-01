@@ -21,7 +21,7 @@ jobs:
     permissions:
       contents: read
     outputs:
-      has_patch: ${{ steps.diff.outputs.has_patch }}
+      has_patch: ${{ steps.diff.outputs.has_patch || 'false' }}
     steps:
       - name: Checkout pull request head
         uses: actions/checkout@v5
@@ -35,12 +35,15 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
-          if [[ -z "$OPENAI_API_KEY" ]]; then
+          if [[ -n "$OPENAI_API_KEY" ]]; then
+            echo 'configured=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'configured=false' >> "$GITHUB_OUTPUT"
             echo 'OPENAI_API_KEY is not configured; auto-fix skipped.' >> "$GITHUB_STEP_SUMMARY"
-            exit 1
           fi
 
       - name: Run Codex safe auto-fix
+        if: steps.preflight.outputs.configured == 'true'
         uses: openai/codex-action@v1
         with:
           openai-api-key: ${{ secrets.OPENAI_API_KEY }}
@@ -51,6 +54,7 @@ jobs:
 
       - name: Build patch artifact
         id: diff
+        if: steps.preflight.outputs.configured == 'true'
         shell: bash
         run: |
           git add -N -A
