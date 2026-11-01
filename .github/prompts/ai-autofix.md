@@ -13,7 +13,7 @@ Inspect the current pull request changes and repository context. Make only minim
 
 Allowed examples: unambiguous documentation/typo fixes, formatting, broken imports, deterministic type/lint errors, and small local bugs with an already specified expected behavior.
 
-Never change or attempt workarounds for: product requirements or business rules; checkout/order/inventory/payment/refund lifecycle; Duitku API/signature/callback behavior; database schema or migrations; RLS, authorization, secrets, or security boundaries; production configuration/deployment; major architecture; or any open product decision.
+Never change or attempt workarounds for: product requirements or business rules; checkout/order/inventory/payment/refund lifecycle; Duitku API/signature/callback behavior; database schema or migrations; RLS, authorization, secrets, or security boundaries; production configuration/deployment; major architecture; or any open product decision. Do not modify `.github/**`, `ai-instruction.md`, `AGENTS.md`, `REQUIREMENTS.md`, `DECISIONS.md`, database migrations, lockfiles, or environment/secret files.
 
 If a finding is ambiguous, risky, requires a new dependency, or cannot be verified, do not change it. Leave it in the report.
 
