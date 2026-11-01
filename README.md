@@ -417,3 +417,8 @@ The instruction file defines the AI agent's operating policy; it does not itself
 - [React Documentation](https://react.dev/)
 - [Vite Documentation](https://vite.dev/guide/)
 - [TypeScript Documentation](https://www.typescriptlang.org/docs/)
+
+
+## AI Agent & Automated Review
+
+Repository automation is documented in [`AI_AGENT_SETUP.md`](./AI_AGENT_SETUP.md). The agent follows [`ai-instruction.md`](./ai-instruction.md), reviews pull requests and scheduled repository snapshots, and may propose low-risk fixes through separate pull requests. It never merges changes into `main`.
