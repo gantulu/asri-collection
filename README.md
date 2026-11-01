@@ -1,4 +1,4 @@
-# Ecommerce Apps
+# Asri Collection
 
 Modern, responsive e-commerce storefront built with React, Vite, and TypeScript. The V1 scope focuses on guest shopping, order creation, and Duitku POP Sandbox payment processing, backed by Supabase.
 
@@ -6,7 +6,7 @@ Modern, responsive e-commerce storefront built with React, Vite, and TypeScript.
 
 ## 1. Project Overview
 
-Ecommerce Apps is a mobile-first storefront application for browsing products, managing a shopping cart, completing guest checkout, and viewing order/payment status.
+Asri Collection is a mobile-first storefront application for browsing products, managing a shopping cart, completing guest checkout, and viewing order/payment status.
 
 The application uses:
 - **Frontend:** React, Vite, TypeScript.
