@@ -13,8 +13,8 @@
 1. Create an OpenAI API key for the Codex GitHub Action.
 2. In the repository, open **Settings → Secrets and variables → Actions → New repository secret**.
 3. Add the secret named `OPENAI_API_KEY`. Never commit the key or put it in workflow variables or files.
-4. In **Settings → Actions → General → Workflow permissions**, allow the workflow token to read and write only if PR creation is required. The write permission is granted only to the isolated PR-publication job.
-5. Enable **Allow GitHub Actions to create and approve pull requests** if the repository setting is available. The workflow creates PRs but does not approve or merge them.
+4. Keep the repository's default workflow-token permission at **Read repository contents** where possible. The workflow declares write access only on the isolated PR-publication job.
+5. Enable **Allow GitHub Actions to create and approve pull requests** under **Settings → Actions → General**. The workflow creates PRs but does not approve or merge them.
 
 ## Triggers
 
