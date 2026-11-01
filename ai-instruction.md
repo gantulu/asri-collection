@@ -1,4 +1,4 @@
-# AI Instructions — Ecommerce Apps
+# AI Instructions — Asri Collection
 
 Dokumen ini menjadi instruksi kerja bagi AI coding agent yang melakukan audit, analisis, perbaikan, dan verifikasi pada repository ini.
 
