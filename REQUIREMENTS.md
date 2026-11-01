@@ -10,13 +10,17 @@
 
 ## 1. Purpose
 
-Asri Collection V1 is a modern, responsive e-commerce storefront that allows customers to discover products, manage a cart, place orders as guests, and complete payment through Duitku POP Sandbox.
+Asri Collection V1 is a **customer-facing e-commerce storefront UI**. Its primary purpose is to provide a simple, modern, responsive shopping experience: customers browse products, select variants, manage a cart, check out as guests, and view order/payment status.
 
-The V1 implementation uses React, Vite, and TypeScript on the frontend, with Supabase PostgreSQL and Supabase Edge Functions for trusted backend operations.
+The frontend experience is the product's primary focus. Supabase PostgreSQL and Supabase Edge Functions support the required catalogue, order, inventory, and payment workflows; backend complexity must not create unnecessary storefront features or UI complexity.
+
+The target frontend stack is React, Vite, TypeScript, and Tailwind CSS. Duitku POP Sandbox is used for V1 payment processing.
 
 ## 2. Product Goals
 
-- Provide a clear, mobile-first shopping experience with desktop support.
+- Make the customer-facing storefront UI the central focus of V1.
+- Provide a simple, clear, mobile-first shopping experience with desktop support.
+- Keep navigation, page layouts, and interactions intuitive; avoid unnecessary features, screens, and abstractions.
 - Allow customers to browse products and categories without creating an account.
 - Support product variants for size and color.
 - Provide cart and guest-checkout flows.
@@ -24,7 +28,7 @@ The V1 implementation uses React, Vite, and TypeScript on the frontend, with Sup
 - Initiate and track payments through Duitku POP Sandbox.
 - Show customers reliable internal order and payment status.
 - Keep operationally sensitive actions under backend control.
-- Keep V1 focused; do not introduce an admin dashboard or automated shipping/refund systems.
+- Keep V1 focused on the storefront and essential customer transaction flow; do not introduce an admin dashboard, unnecessary modules, or automated shipping/refund systems.
 
 ## 3. V1 Scope
 
@@ -126,8 +130,9 @@ The V1 implementation uses React, Vite, and TypeScript on the frontend, with Sup
 
 | ID | Requirement | Priority | Status |
 | --- | --- | --- | --- |
-| NFR-001 | The storefront must be responsive and designed mobile-first, with desktop support. | Must | Draft |
-| NFR-002 | User-facing flows must provide clear loading, empty, validation, error, and success states. | Must | Draft |
+| NFR-001 | The storefront UI must be simple, responsive, and designed mobile-first, with desktop support. | Must | Approved |
+| NFR-002 | User-facing flows must provide clear loading, empty, validation, error, and success states without unnecessary UI complexity. | Must | Approved |
+| NFR-011 | UI and application structure must remain proportionate to V1 needs; avoid unnecessary screens, features, dependencies, and abstractions. | Must | Approved |
 | NFR-003 | Backend operations are authoritative for prices, stock, order creation, and payment status. | Must | Approved |
 | NFR-004 | Privileged operations and payment integration must execute on the backend, not in browser code. | Must | Approved |
 | NFR-005 | Secrets, service-role credentials, and Duitku signing credentials must never be exposed in frontend bundles or committed to the repository. | Must | Approved |
@@ -139,7 +144,7 @@ The V1 implementation uses React, Vite, and TypeScript on the frontend, with Sup
 
 ## 6. Approved Technology Constraints
 
-- Frontend: React + Vite + TypeScript.
+- Frontend: React + Vite + TypeScript + Tailwind CSS.
 - Backend: Supabase PostgreSQL + Supabase Edge Functions.
 - Client routing: React Router.
 - Client state: Zustand.
@@ -202,7 +207,7 @@ The following details are not fully specified by this requirements baseline and 
 - **OQ-004 — Payment recovery:** exact customer-facing behavior and operator escalation path for ambiguous provider outcomes.
 - **OQ-005 — Operator authorization:** concrete identity/authorization mechanism for operator-only backend actions.
 - **OQ-006 — Catalogue presentation:** product attributes and filtering/sorting behavior beyond simple categories.
-- **OQ-007 — UX details:** exact responsive breakpoints, accessibility target, and detailed page-level interaction behavior.
+- **OQ-007 — UX details:** exact responsive breakpoints, accessibility target, and detailed page-level interaction behavior. Keep these decisions minimal and driven by real storefront needs.
 
 Open questions do not authorize an AI agent to invent business rules. Resolve them through explicit product decisions before implementing the affected behavior.
 
