@@ -226,3 +226,31 @@ Open questions do not authorize an AI agent to invent business rules. Resolve th
 - An AI agent may identify inconsistencies and propose edits, but must not silently change approved business rules.
 - Any change to scope, inventory lifecycle, order/payment lifecycle, shipping, refunds, authorization, or security boundaries requires an explicit user decision.
 - Documentation does not prove implementation. Verify actual source code, migrations, functions, and tests before reporting a requirement as implemented.
+
+## 13. Product Discovery Checkpoint — Confirmed Scope
+
+This section records the product decisions explicitly confirmed during the current planning conversation. Continue requirement discovery one step at a time; do not generate the complete application or infer undecided requirements.
+
+### Confirmed product direction
+
+| ID | Requirement | Status |
+| --- | --- | --- |
+| DISC-001 | V1 is a customer-facing e-commerce storefront UI. | Confirmed |
+| DISC-002 | The target users are general online-store visitors who want to purchase products. | Confirmed |
+| DISC-003 | Customers use guest checkout; customer login is not required. | Confirmed |
+| DISC-004 | V1 focuses on the storefront and essential customer shopping flow; no admin dashboard. | Confirmed |
+| DISC-005 | Product categories should remain simple. | Confirmed |
+| DISC-006 | Products support size and color variants. | Confirmed |
+
+### Planning workflow
+
+1. Gather and reconcile requirements in small, explicit steps.
+2. Record each confirmed decision in this document.
+3. Keep unresolved topics open; ask only for the next necessary decision.
+4. Prepare the decision log and technical design after the requirements have been reviewed.
+5. Do not generate the whole application, modify application code, or expand scope before the user explicitly authorizes implementation.
+
+### Topics to discuss in a later step
+
+Payment details and inventory rules were not part of the latest confirmation in this planning conversation. Existing decisions elsewhere in this document remain unchanged unless the user explicitly supersedes them. Revisit these topics during requirement reconciliation rather than inventing new behavior.
+
